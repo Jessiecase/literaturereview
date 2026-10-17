@@ -1,29 +1,28 @@
 # 文獻整理教室
 
-一般文獻與系統性文獻的學生整理表單、統一教師監考、雲端草稿與表格版 Word／Excel 答案匯出。
+一般文獻學生整理表單、教師監考、雲端草稿與表格版 Word／Excel 答案匯出。
 
 ## 使用網站
 
-- [學生共同入口](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/review)
+- [學生入口](https://jessiecase.github.io/literaturereview/)
 - [一般文獻整理](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/literature)
-- [系統性文獻整理](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/systematic)
 - [統一教師監考](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/literature-teacher)
 
 教師使用課程指定密碼，密碼不存放於此儲存庫。學生以原瀏覽器續填；每份紀錄整理一篇文章。
 
 ## GitHub Pages
 
-`docs/index.html` 保留學生共同入口的介面，連到目前運作的學生與教師網站。在儲存庫的 **Settings → Pages → Source** 選擇 **GitHub Actions**，執行 `Publish literature review entry` workflow 即可發布入口。
+`docs/index.html` 保留學生入口的介面，連到目前運作的學生與教師網站。在儲存庫的 **Settings → Pages → Source** 選擇 **GitHub Actions**，執行 `Publish literature review entry` workflow 即可發布入口。
 
 GitHub Pages 只提供靜態網站，無法執行本專案的 D1 資料庫及教師驗證 API。學生作答、即時監考與既有紀錄仍由上列正式網站服務；入口頁不會把學生資料或教師密碼存入 GitHub。若只需從分支發布，也可選擇 main 的 `/docs` 目錄作為 Pages 來源。
 
-## 完整網站原始碼
+## 一般文獻網站原始碼
 
 本儲存庫同時包含可獨立重建文獻整理網站的原始碼。它沒有綁定現有網站 ID、資料庫內容或正式密碼。
 
 - `public/`：學生表單、教師監考、Word／Excel 匯出。
-- `app/api/literature`、`app/api/systematic`：學生儲存、教師驗證與繳交鎖定。
-- `database/schema.sql`：兩類文獻資料表。
+- `app/api/literature`：學生儲存、教師驗證與繳交鎖定。
+- `database/schema.sql`：一般文獻資料表。
 - `tests/`：Office 匯出與本機 API 測試。
 
 ### 本機執行

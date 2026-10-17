@@ -5,9 +5,6 @@
   function answerRecords(data, kind, sections) {
     const records = [];
     const add = (category, label, value) => records.push([category, label, value || '（尚未填寫）']);
-    if (kind === 'systematic') {
-      sections.forEach(([name, fields], i) => fields.forEach(([key, label]) => add((i + 1) + ' ' + name, label, data[key])));
-    } else {
       [['一 文章名稱',[['title','文章名稱']]],['二 作者姓名與年代',[['authors','作者姓名'],['year','發表年代／年份']]],['三 研究目的',[['purpose','研究目的']]],['四 研究設計',[['design','研究設計']]],['五 研究對象',[['population','研究對象特性'],['setting','研究場域'],['sample','個案數'],['inclusion','收案條件'],['exclusion','排除條件']]]].forEach(([name,fields])=>fields.forEach(([key,label])=>add(name,label,data[key])));
       data.variables.forEach((v,i)=>[['name','變項名稱'],['tool','使用的研究工具'],['reliability','信度'],['validity','效度']].forEach(([key,label])=>add('六 研究變項 '+(i+1),label,v[key])));
       if (!data.variables.length) add('六 研究變項','研究變項','');
@@ -16,7 +13,6 @@
         entries.forEach((r,i)=>[['variables','變項或變項關係'],['method','統計或分析方法'],['findings','結果數值與說明']].forEach(([key,label])=>add('七 研究結果 '+type+' '+(i+1),label,r[key])));
         if(!entries.length)add('七 研究結果 '+type,'研究結果','');
       });
-    }
     return records;
   }
   function wrapParts(value, width) {
@@ -42,7 +38,7 @@
       const parts=wrapParts(value,70);
       parts.forEach((part,i)=>{const categoryLines=wrapParts(category,20)[0].lines,labelLines=wrapParts(label+(i?'（續）':''),32)[0].lines;row([category,label+(i?'（續）':''),part.text],Math.max(28,Math.max(part.lines,categoryLines,labelLines)*16+10),[3,0,0]);});
     }
-    const sheetName=kind==='systematic'?'系統性文獻整理':'一般文獻整理';
+    const sheetName='一般文獻整理';
     const styles=`${xml}<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="3"><font><sz val="11"/><color rgb="FF233D3B"/><name val="Microsoft JhengHei"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Microsoft JhengHei"/></font><font><b/><sz val="16"/><color rgb="FF233D3B"/><name val="Microsoft JhengHei"/></font></fonts><fills count="4"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF245846"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF0F5F1"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border/><border><bottom style="hair"><color rgb="FFDCE5DE"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="49" fontId="0" fillId="0" borderId="1" xfId="0" applyAlignment="1" applyNumberFormat="1"><alignment horizontal="left" vertical="top" wrapText="1"/></xf><xf numFmtId="49" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="49" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"><alignment horizontal="left" vertical="center"/></xf><xf numFmtId="49" fontId="0" fillId="3" borderId="1" xfId="0" applyFill="1" applyAlignment="1"><alignment horizontal="left" vertical="top" wrapText="1"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
     return zip({
       '[Content_Types].xml':`${xml}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,

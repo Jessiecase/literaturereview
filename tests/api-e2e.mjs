@@ -1,16 +1,9 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import vm from 'node:vm';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const base=new URL(process.env.REVIEW_TEST_URL||'http://127.0.0.1:3012');
 if(!['localhost','127.0.0.1','[::1]'].includes(base.hostname))throw Error('This test creates records and is restricted to loopback test servers.');
 const teacher=process.env.REVIEW_TEST_KEY;if(!teacher)throw Error('Set REVIEW_TEST_KEY to the local test teacher secret.');
-const context=vm.createContext({});vm.runInContext(fs.readFileSync(path.join(root,'public/systematic-schema.js'),'utf8')+';this.testKeys=fieldKeys;',context);
-const systematic=Object.fromEntries(context.testKeys.map(k=>[k,'未報告']));systematic.title='系統性測試';
 const general={title:'一般文獻測試',authors:'測試作者',year:'2026',purpose:'測試目的',design:'橫斷式',population:'成年人',setting:'未報告',sample:'100',inclusion:'成年',exclusion:'未報告',variables:[{name:'睡眠',tool:'PSQI',reliability:'未報告',validity:'未報告'}],results:[{type:'單變項',variables:'睡眠',method:'描述統計',findings:'平均 5 分'}]};
-for(const [kind,data,maxStep] of [['literature',general,7],['systematic',systematic,9]]){
+for(const [kind,data,maxStep] of [['literature',general,7]]){
  const endpoint=new URL('/api/'+kind,base);
  const req=async(body,token,method='POST',search='')=>{const response=await fetch(endpoint.href+search,{method,headers:{'content-type':'application/json',...(token?{authorization:'Bearer '+token}:{})},...(method==='POST'?{body:JSON.stringify(body)}:{})});return {status:response.status,data:await response.json()};};
  assert.equal((await req(null,null,'GET')).status,401);
