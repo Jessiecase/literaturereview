@@ -16,4 +16,3 @@ jobs:
         run: |
           node --check public/word-export.js
           node --check public/excel-export.js
-          node --check public/systematic-schema.js

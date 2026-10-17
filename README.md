@@ -2,6 +2,8 @@
 
 一般文獻學生整理表單、教師監考、雲端草稿與表格版 Word／Excel 答案匯出。
 
+目前公開範圍僅包含一般文獻整理；後續維護請維持此發布範圍。
+
 ## 使用網站
 
 - [學生入口](https://jessiecase.github.io/literaturereview/)
