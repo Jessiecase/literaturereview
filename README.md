@@ -7,8 +7,8 @@
 ## 使用網站
 
 - [學生入口](https://jessiecase.github.io/literaturereview/)
-- [一般文獻整理](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/literature)
-- [統一教師監考](https://preoperative-care-chap4-oral-exam.huang-shihtzu.chatgpt.site/literature-teacher)
+- [一般文獻整理](https://literature.huang-shihtzu.chatgpt.site/literature)
+- [統一教師監考](https://literature.huang-shihtzu.chatgpt.site/literature-teacher)
 
 教師使用課程指定密碼，密碼不存放於此儲存庫。學生以原瀏覽器續填；每份紀錄整理一篇文章。
 
